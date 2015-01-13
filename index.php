@@ -1,6 +1,5 @@
 <?php
 
-
 class Checkerboard 
 {
 	private $boardSize;
@@ -16,24 +15,51 @@ class Checkerboard
 		if($this->boardSize > 0 && $this->squareSize > 0){
 			echo "<table>";
 			$cellCount = 0;
+			$rowCount = 0;
 
 			for ($i=0; $i < $this->boardSize; $i++) {
+			
+				++$rowCount;
+			
 				echo "<tr><td colspan = $this->boardSize>".$this->drawRowSeperator()."</td></tr>";
 				echo "<tr>"; 
-				for ($j=0; $j < $this->boardSize; $j++) { 
-
-					++$cellCount;
-
-					if($cellCount % 2 == 0){
-						echo "<td>"; 
-						echo $this->drawInnerPattern(true);
-						echo "</td>"; 
+		
+				if($rowCount % 2 == 0)
+				{
+					$cellCount = $this->boardSize * $rowCount;
+					
+					for ($j=$cellCount ; $j > (($rowCount - 1) * $this->boardSize); $j--) { 
+	
+						if($j % 2 == 0){
+							echo "<td>"; 
+							echo $this->drawInnerPattern(true);
+							echo "</td>"; 
+						}
+						else
+						{
+							echo "<td>"; 
+							echo $this->drawInnerPattern(false);
+							echo "</td>"; 
+						}						
 					}
-					else
-					{
-						echo "<td>"; 
-						echo $this->drawInnerPattern(false);
-						echo "</td>"; 
+				}
+				else
+				{
+					for ($k=$cellCount  + 1; $k < $this->boardSize * $rowCount + 1; $k++) { 
+
+						++$cellCount;
+
+						if($k % 2 == 0){
+							echo "<td>"; 
+							echo $this->drawInnerPattern(true);
+							echo "</td>"; 
+						}
+						else
+						{
+							echo "<td>"; 
+							echo $this->drawInnerPattern(false);
+							echo "</td>"; 
+						}
 					}
 				}
 				echo "<tr/>";	
@@ -91,7 +117,7 @@ class Checkerboard
 	}
 }
 
-$board = new Checkerboard(4,5);
+$board = new Checkerboard(4,4);
 
 echo $board->drawBoard();
 ?>
