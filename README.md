@@ -15,9 +15,5 @@ For an example, lets assume boardsize = 3, and square size = 2
 456
 789
 
-Even number positions will filled up with, 
-
- ##
- ##
-
+Even number positions will filled up with hash symbols ,
 and Odd number positions will filled up with empty string data.
